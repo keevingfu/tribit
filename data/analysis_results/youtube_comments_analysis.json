@@ -1,0 +1,50 @@
+{
+  "sentiment_analysis": {
+    "中性评论": 402
+  },
+  "likes_stats": {
+    "avg_likes": 16.649253731343283,
+    "max_likes": 92,
+    "min_likes": 0
+  },
+  "top_comments": [
+    {
+      "text": "",
+      "likes": 92,
+      "author": ""
+    },
+    {
+      "text": "",
+      "likes": 92,
+      "author": ""
+    },
+    {
+      "text": "",
+      "likes": 92,
+      "author": ""
+    },
+    {
+      "text": "",
+      "likes": 89,
+      "author": ""
+    },
+    {
+      "text": "",
+      "likes": 89,
+      "author": ""
+    }
+  ],
+  "top_commenters": {
+    "": 380,
+    "@superbasslab": 2,
+    "@mathias4891": 2,
+    "@jeepfan12": 2,
+    "@RaimundoPezao-e7h": 2
+  },
+  "length_stats": {
+    "avg_length": 0.753731343283582,
+    "max_length": 54,
+    "min_length": 0
+  },
+  "analysis_date": "2025-04-21 23:07:23"
+}

@@ -1,0 +1,109 @@
+/* Tribit YouTube India VOC Insight Dashboard 样式 */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    font-weight: 600;
+    background-color: #f1f8ff;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.display-4 {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #495057;
+}
+
+.comment-text {
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.comment-likes {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+.comment-video {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.sentiment-positive {
+    color: #198754;
+}
+
+.sentiment-neutral {
+    color: #6c757d;
+}
+
+.sentiment-negative {
+    color: #dc3545;
+}
+
+/* 印度国旗色彩主题 */
+.india-theme-saffron {
+    color: #FF9933;
+}
+
+.india-theme-white {
+    color: #FFFFFF;
+}
+
+.india-theme-green {
+    color: #138808;
+}
+
+.india-theme-blue {
+    color: #000080;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+}

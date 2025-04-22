@@ -1,0 +1,281 @@
+{
+    "rank_distribution": [
+        {
+            "rank_group": "1-3名",
+            "keyword_count": 115
+        },
+        {
+            "rank_group": "4-10名",
+            "keyword_count": 134
+        },
+        {
+            "rank_group": "11-20名",
+            "keyword_count": 100
+        },
+        {
+            "rank_group": "20名以后",
+            "keyword_count": 543
+        }
+    ],
+    "volume_distribution": [
+        {
+            "volume_group": "大搜索量 (>10000)",
+            "keyword_count": 5,
+            "total_volume": 878500
+        },
+        {
+            "volume_group": "中搜索量 (1001-10000)",
+            "keyword_count": 54,
+            "total_volume": 114100
+        },
+        {
+            "volume_group": "小搜索量 (101-1000)",
+            "keyword_count": 322,
+            "total_volume": 118960
+        },
+        {
+            "volume_group": "极小搜索量 (≤100)",
+            "keyword_count": 511,
+            "total_volume": 26890
+        }
+    ],
+    "top_traffic_keywords": [
+        {
+            "keyword": "xfree",
+            "position": 5,
+            "search_volume": 301000,
+            "traffic": 13244.0,
+            "percentage": 54.01
+        },
+        {
+            "keyword": "tribit stormbox blast",
+            "position": 1,
+            "search_volume": 1900,
+            "traffic": 1520.0,
+            "percentage": 6.19
+        },
+        {
+            "keyword": "tribit",
+            "position": 1,
+            "search_volume": 1900,
+            "traffic": 1520.0,
+            "percentage": 6.19
+        },
+        {
+            "keyword": "tribit speaker",
+            "position": 1,
+            "search_volume": 1300,
+            "traffic": 1040.0,
+            "percentage": 4.24
+        },
+        {
+            "keyword": "tribit headphones",
+            "position": 1,
+            "search_volume": 1000,
+            "traffic": 800.0,
+            "percentage": 3.26
+        },
+        {
+            "keyword": "tribit stormbox",
+            "position": 1,
+            "search_volume": 1000,
+            "traffic": 800.0,
+            "percentage": 3.26
+        },
+        {
+            "keyword": "tribit stormbox micro 2",
+            "position": 1,
+            "search_volume": 880,
+            "traffic": 704.0,
+            "percentage": 2.87
+        },
+        {
+            "keyword": "tribit earbuds",
+            "position": 1,
+            "search_volume": 590,
+            "traffic": 472.0,
+            "percentage": 1.92
+        },
+        {
+            "keyword": "tribit flybuds 3",
+            "position": 1,
+            "search_volume": 390,
+            "traffic": 312.0,
+            "percentage": 1.27
+        },
+        {
+            "keyword": "tribit stormbox blast 2",
+            "position": 1,
+            "search_volume": 320,
+            "traffic": 256.0,
+            "percentage": 1.04
+        }
+    ],
+    "intent_distribution": [
+        {
+            "intent": "informational, transactional",
+            "count": 382
+        },
+        {
+            "intent": "informational",
+            "count": 218
+        },
+        {
+            "intent": "commercial",
+            "count": 173
+        },
+        {
+            "intent": "transactional",
+            "count": 51
+        },
+        {
+            "intent": "navigational, transactional",
+            "count": 28
+        },
+        {
+            "intent": "navigational",
+            "count": 18
+        },
+        {
+            "intent": "commercial, informational",
+            "count": 17
+        },
+        {
+            "intent": "commercial, navigational",
+            "count": 4
+        },
+        {
+            "intent": "informational, navigational",
+            "count": 1
+        }
+    ],
+    "product_performance": [
+        {
+            "series": "XFree系列",
+            "keyword_count": 19,
+            "avg_position": 23.36842105263158,
+            "total_volume": 317640,
+            "total_traffic": 13571.0
+        },
+        {
+            "series": "其他/通用",
+            "keyword_count": 532,
+            "avg_position": 42.82142857142857,
+            "total_volume": 725030,
+            "total_traffic": 4758.0
+        },
+        {
+            "series": "StormBox系列",
+            "keyword_count": 178,
+            "avg_position": 35.20786516853933,
+            "total_volume": 64020,
+            "total_traffic": 4514.0
+        },
+        {
+            "series": "XSound系列",
+            "keyword_count": 99,
+            "avg_position": 27.727272727272727,
+            "total_volume": 19120,
+            "total_traffic": 766.0
+        },
+        {
+            "series": "FlyBuds系列",
+            "keyword_count": 46,
+            "avg_position": 21.41304347826087,
+            "total_volume": 5400,
+            "total_traffic": 568.0
+        },
+        {
+            "series": "QuietPlus系列",
+            "keyword_count": 8,
+            "avg_position": 19.375,
+            "total_volume": 6140,
+            "total_traffic": 252.0
+        },
+        {
+            "series": "MoveBuds系列",
+            "keyword_count": 10,
+            "avg_position": 47.3,
+            "total_volume": 1100,
+            "total_traffic": 92.0
+        }
+    ],
+    "serp_features": [
+        {
+            "feature": "Related searches",
+            "count": 877
+        },
+        {
+            "feature": "Video",
+            "count": 852
+        },
+        {
+            "feature": "People also ask",
+            "count": 814
+        },
+        {
+            "feature": "Image pack",
+            "count": 696
+        },
+        {
+            "feature": "People also search",
+            "count": 675
+        },
+        {
+            "feature": "Reviews",
+            "count": 664
+        },
+        {
+            "feature": "Image",
+            "count": 589
+        },
+        {
+            "feature": "Sitelinks",
+            "count": 573
+        },
+        {
+            "feature": "Discussions and forums",
+            "count": 516
+        },
+        {
+            "feature": "Popular products",
+            "count": 385
+        }
+    ],
+    "rank_changes": [
+        {
+            "change": "排名上升",
+            "keyword_count": 7
+        },
+        {
+            "change": "排名下降",
+            "keyword_count": 12
+        },
+        {
+            "change": "排名不变",
+            "keyword_count": 836
+        }
+    ],
+    "competition_analysis": [
+        {
+            "level": "高竞争 (>0.66)",
+            "keyword_count": 668,
+            "avg_cpc": 0.41940119760479044
+        },
+        {
+            "level": "中竞争 (0.33-0.66)",
+            "keyword_count": 37,
+            "avg_cpc": 0.24972972972972973
+        },
+        {
+            "level": "低竞争 (<0.33)",
+            "keyword_count": 76,
+            "avg_cpc": 0.07210526315789473
+        },
+        {
+            "level": "无竞争 (0)",
+            "keyword_count": 111,
+            "avg_cpc": 0.0
+        }
+    ]
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribit SEO 排名分析仪表板</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/seo-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="py-3 mb-4 border-bottom">
+            <div class="container d-flex align-items-center justify-content-between">
+                <h1 class="fs-4">Tribit SEO 排名分析仪表板</h1>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        中文
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item active" href="#">中文</a></li>
+                        <li><a class="dropdown-item" href="#">English</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- 概览卡片 -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">总关键词数</h5>
+                            <p class="card-text display-4" id="totalKeywords">892</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">前10名关键词</h5>
+                            <p class="card-text display-4" id="top10Keywords">249</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">总搜索量</h5>
+                            <p class="card-text display-4" id="totalSearchVolume">1,138,450</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">总流量</h5>
+                            <p class="card-text display-4" id="totalTraffic">24,521</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 排名分布和搜索量分布 -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            关键词排名分布
+                        </div>
+                        <div class="card-body">
+                            <div id="rankDistributionChart" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            搜索量分布
+                        </div>
+                        <div class="card-body">
+                            <div id="volumeDistributionChart" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 流量贡献最大的关键词 -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            流量贡献最大的关键词
+                        </div>
+                        <div class="card-body">
+                            <div id="topTrafficKeywordsChart" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关键词意图和产品系列表现 -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            关键词意图分布
+                        </div>
+                        <div class="card-body">
+                            <div id="keywordIntentChart" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            产品系列SEO表现
+                        </div>
+                        <div class="card-body">
+                            <div id="productPerformanceChart" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERP特性分布 -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            SERP特性分布
+                        </div>
+                        <div class="card-body">
+                            <div id="serpFeaturesChart" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 排名变化和竞争度分析 -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            排名变化分析
+                        </div>
+                        <div class="card-body">
+                            <div id="rankChangesChart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            竞争度分析
+                        </div>
+                        <div class="card-body">
+                            <div id="competitionAnalysisChart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 关键词排名表格 -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>关键词排名详情</span>
+                            <div class="input-group" style="width: 300px;">
+                                <input type="text" class="form-control" id="keywordSearch" placeholder="搜索关键词...">
+                                <button class="btn btn-outline-secondary" type="button" id="searchButton">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>关键词</th>
+                                            <th>排名</th>
+                                            <th>搜索量</th>
+                                            <th>流量</th>
+                                            <th>流量占比</th>
+                                            <th>CPC</th>
+                                            <th>竞争度</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="keywordsTableBody">
+                                        <!-- 表格内容将通过JS动态加载 -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <nav>
+                                <ul class="pagination justify-content-center" id="keywordsPagination">
+                                    <!-- 分页控件将通过JS动态加载 -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="py-3 my-4 border-top">
+            <div class="container text-center">
+                <span class="text-muted">© 2025 Tribit Analytics</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/seo-dashboard.js"></script>
+</body>
+</html>

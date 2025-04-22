@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribit Audio Brand Market Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            color: #1a237e;
+            font-size: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .dual-chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-half {
+            flex: 1 1 calc(50% - 10px);
+            min-width: 300px;
+            height: 350px;
+        }
+        
+        .insights-container {
+            background-color: #e8f5e9;
+            border-left: 4px solid #388e3c;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .insights-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .insights-content {
+            margin-bottom: 10px;
+        }
+        
+        .recommendations {
+            margin-top: 15px;
+        }
+        
+        .recommendations-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1565c0;
+        }
+        
+        .recommendation-item {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .recommendation-item:before {
+            content: "•";
+            color: #1565c0;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .kpi-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .kpi-card {
+            flex: 1 1 calc(25% - 15px);
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a237e;
+            margin: 10px 0;
+        }
+        
+        .kpi-title {
+            font-size: 0.9rem;
+            color: #757575;
+            margin-bottom: 5px;
+        }
+        
+        .kpi-change {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kpi-increase {
+            color: #388e3c;
+        }
+        
+        .kpi-decrease {
+            color: #d32f2f;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .timeline-container {
+            margin: 30px 0;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #e0e0e0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #1a237e;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Tribit Audio Brand Market Analysis Dashboard</h1>
+            <p>Short Video Marketing Strategy and Competitive Analysis</p>
+        </div>
+        
+        <!-- Brand Overview Section -->
+        <div class="section">
+            <h2 class="section-header">Brand Performance Overview</h2>
+            
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-title">Amazon Category Ranking</div>
+                    <div class="kpi-value">Top 10</div>
+                    <div class="kpi-change kpi-increase">↑ 5 positions from 2023</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Annual Growth Rate</div>
+                    <div class="kpi-value">20%</div>
+                    <div class="kpi-change kpi-increase">↑ 3% YoY</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">XSound Go Reviews</div>
+                    <div class="kpi-value">34K+</div>
+                    <div class="kpi-change kpi-increase">↑ 8K from last year</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Brand Awards</div>
+                    <div class="kpi-value">3+</div>
+                    <div class="kpi-title">Red Dot, VGP Gold, IF Design</div>
+                </div>
+            </div>
+            
+            <div id="brand-performance-chart" class="chart-container"></div>
+            
+            <div class="insights-container">
+                <div class="insights-title">Key Insights</div>
+                <div class="insights-content">
+                    Tribit has established a solid "quality alternative" positioning, differentiating through waterproofing, battery life, and cost-effectiveness. The brand has achieved significant success with a Top 10 ranking in Amazon's audio category and 20% annual growth rate.
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">Strategic Recommendations</div>
+                    <div class="recommendation-item">Further strengthen the "quality alternative" positioning through consistent messaging across all touchpoints</div>
+                    <div class="recommendation-item">Leverage international design awards in marketing materials to build credibility</div>
+                    <div class="recommendation-item">Focus on XSound Go's momentum to drive brand awareness and cross-product adoption</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Competitive Landscape Section -->
+        <div class="section">
+            <h2 class="section-header">Competitive Landscape Analysis</h2>
+            
+            <div class="dual-chart-container">
+                <div id="market-share-chart" class="chart-half"></div>
+                <div id="price-performance-chart" class="chart-half"></div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Competitor</th>
+                            <th>Category</th>
+                            <th>Key Products</th>
+                            <th>Competitive Advantage</th>
+                            <th>Market Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Soundcore (Anker)</td>
+                            <td>Direct Competitor</td>
+                            <td>Motion series, P20i</td>
+                            <td>Content ecosystem, ASMR marketing</td>
+                            <td>1.22M search volume, P20i in top sellers</td>
+                        </tr>
+                        <tr>
+                            <td>TOZO</td>
+                            <td>Direct Competitor</td>
+                            <td>T6, A1 (80K+ reviews)</td>
+                            <td>Extreme cost control, faster development</td>
+                            <td>T6: 200 daily units on Amazon US</td>
+                        </tr>
+                        <tr>
+                            <td>Srhythm</td>
+                            <td>Direct Competitor</td>
+                            <td>NC25 noise-cancelling</td>
+                            <td>Technical focus, 12 utility patents</td>
+                            <td>NC25: 23K monthly units</td>
+                        </tr>
+                        <tr>
+                            <td>JBL</td>
+                            <td>Premium Brand</td>
+                            <td>Flip & Go series</td>
+                            <td>Brand recognition, outdoor marketing</td>
+                            <td>Premium pricing, widespread distribution</td>
+                        </tr>
+                        <tr>
+                            <td>Bose</td>
+                            <td>Premium Brand</td>
+                            <td>SoundLink series</td>
+                            <td>Premium brand positioning</td>
+                            <td>High-end market dominance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="competitor-strategy-chart" class="chart-container"></div>
+            
+            <div class="insights-container">
+                <div class="insights-title">Competitive Landscape Insights</div>
+                <div class="insights-content">
+                    Tribit faces a three-layer competitive structure: direct competitors (Soundcore, TOZO, Srhythm), premium brands (JBL, Bose, Sony), and cross-category emerging brands. Each competitor employs distinct strategies: Srhythm's technical focus, TOZO's cost leadership, and Soundcore's content ecosystem dominance.
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">Strategic Recommendations</div>
+                    <div class="recommendation-item">Adopt a hybrid strategy combining Srhythm's technical visualization with Soundcore's content approach</div>
+                    <div class="recommendation-item">Create visual demonstrations of Tribit's waterproofing and battery advantages compared to TOZO's cost-focused products</div>
+                    <div class="recommendation-item">Develop a unique content ecosystem focused on outdoor/lifestyle scenarios where Tribit products excel</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Short Video Content Strategy Section -->
+        <div class="section">
+            <h2 class="section-header">Short Video Content Strategy Analysis</h2>
+            
+            <div class="dual-chart-container">
+                <div id="platform-performance-chart" class="chart-half"></div>
+                <div id="content-format-chart" class="chart-half"></div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Optimal Content Structure</th>
+                            <th>Top Performance Example</th>
+                            <th>Key Metrics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>YouTube</td>
+                            <td>Pyramid Structure:<br>- Professional reviews<br>- Mid-tier KOL comparisons<br>- User unboxings</td>
+                            <td>TOZO T12 reviews: 38M+ views</td>
+                            <td>42% better technical comprehension with 3D animations</td>
+                        </tr>
+                        <tr>
+                            <td>TikTok</td>
+                            <td>Three-segment Structure:<br>- 3s pain point/hook<br>- 8s function demonstration<br>- 4s promotional CTA</td>
+                            <td>Soundcore ASMR: 230M #SoundTherapy views</td>
+                            <td>41% higher cart addition rate</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram</td>
+                            <td>Visual Aesthetic Focus:<br>- Product lifestyle imagery<br>- Music scene integration<br>- UGC showcase</td>
+                            <td>Marshall vintage aesthetic: 120K+ likes per post</td>
+                            <td>29% increased premium pricing ability</td>
+                        </tr>
+                        <tr>
+                            <td>Amazon SBV/SDV</td>
+                            <td>"3T Principle":<br>- Technical Proof<br>- Time Compression<br>- Tactile Simulation</td>
+                            <td>Waterproof test videos: 4.7% CTR</td>
+                            <td>83% higher CTR vs static displays</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="content-type-performance-chart" class="chart-container"></div>
+            
+            <div class="insights-container">
+                <div class="insights-title">Content Strategy Insights</div>
+                <div class="insights-content">
+                    Successful competitors employ platform-specific content strategies with distinct structures optimized for each channel. Three primary content archetypes stand out: technical proof content (laboratory demonstrations), scenario resonance content (outdoor/lifestyle use cases), and emotional drive content (ASMR/sensory experiences).
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">Content Strategy Recommendations</div>
+                    <div class="recommendation-item">Develop platform-specific content strategies following proven structures (YouTube pyramid, TikTok three-segment, Instagram aesthetics)</div>
+                    <div class="recommendation-item">Create a balanced content mix across the three archetypes with emphasis on Tribit's strengths (waterproofing, battery life)</div>
+                    <div class="recommendation-item">Implement "1+3+N" content distribution: 1 brand video + 3 scenario videos + N UGC derivatives</div>
+                    <div class="recommendation-item">Focus on visual demonstrations of technical advantages compared to competitors</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- E-commerce Optimization Section -->
+        <div class="section">
+            <h2 class="section-header">E-commerce Platform Optimization</h2>
+            
+            <div class="dual-chart-container">
+                <div id="amazon-performance-chart" class="chart-half"></div>
+                <div id="shopify-performance-chart" class="chart-half"></div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Strategy Component</th>
+                            <th>Top Performer Example</th>
+                            <th>Key Performance Indicators</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Amazon SBV/SDV Ads</td>
+                            <td>"3T Principle" video structure</td>
+                            <td>TOZO T10: 27 weeks in TOP3</td>
+                            <td>27%-43% conversion rate increase</td>
+                        </tr>
+                        <tr>
+                            <td>Amazon Product Pages</td>
+                            <td>A+ content with embedded videos</td>
+                            <td>Waterproof test demonstrations</td>
+                            <td>Stay time extended to 2.1-4.2 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Shopify Independent Sites</td>
+                            <td>Content-Product-Service framework</td>
+                            <td>Wireless earphone buying guides</td>
+                            <td>31% organic traffic, 67% conversion increase</td>
+                        </tr>
+                        <tr>
+                            <td>Cross-Platform Integration</td>
+                            <td>QR codes linking to UGC galleries</td>
+                            <td>"Scan QR for more" in SBV ads</td>
+                            <td>27% conversion improvement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="conversion-funnel-chart" class="chart-container"></div>
+            
+            <div class="insights-container">
+                <div class="insights-title">E-commerce Optimization Insights</div>
+                <div class="insights-content">
+                    Successful e-commerce strategies integrate platform-specific optimizations with cross-channel consistency. Top performers utilize embedded videos on product pages, "3T Principle" video ads, and strategic cross-linking between content and commerce platforms.
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">E-commerce Optimization Recommendations</div>
+                    <div class="recommendation-item">Implement SBV/SDV video ads following the "3T Principle" with laboratory + lifestyle demonstrations</div>
+                    <div class="recommendation-item">Enhance A+ content with 15-second scenario videos and long-term usage testimonials</div>
+                    <div class="recommendation-item">Develop a Content-Product-Service framework for Shopify with expert guides and tutorial videos</div>
+                    <div class="recommendation-item">Create QR code bridges linking SBV ads to UGC galleries and exclusive offers</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Growth Strategy Implementation Section -->
+        <div class="section">
+            <h2 class="section-header">Full-Funnel Growth Strategy</h2>
+            
+            <div id="funnel-strategy-chart" class="chart-container"></div>
+            
+            <div class="timeline-container">
+                <h3 style="margin-bottom: 20px;">Implementation Timeline</h3>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase 1: Months 1-3</div>
+                            <p>Content visualization improvements, SBV/SDV video optimization, initial KOL collaborations</p>
+                            <p><strong>Expected Results:</strong> 35% CTR improvement, 3-minute page stay, 15% conversion increase</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase 2: Months 4-6</div>
+                            <p>Establish creative laboratory, develop 500+ scene material library, implement platform-specific strategies</p>
+                            <p><strong>Expected Results:</strong> 4-6% market share growth, cross-platform consistency, 15% CAC reduction</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase 3: Months 7-9</div>
+                            <p>UGC incentive system implementation, cross-platform collaboration, data-driven optimization</p>
+                            <p><strong>Expected Results:</strong> 18% repurchase rate, 40% social engagement increase, 22% CAC reduction</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase 4: Months 10-12</div>
+                            <p>AI personalization optimization, full-channel growth flywheel development, user community expansion</p>
+                            <p><strong>Expected Results:</strong> 8-12% market share growth, 19% CLTV improvement, significant brand equity growth</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="insights-container">
+                <div class="insights-title">Growth Strategy Insights</div>
+                <div class="insights-content">
+                    A successful growth strategy requires coordinated efforts across the entire customer journey funnel. By implementing stage-specific content and platform optimizations, Tribit can achieve significant improvements in key metrics while building a sustainable growth flywheel.
+                </div>
+                
+                <div class="recommendations">
+                    <div class="recommendations-title">Growth Strategy Recommendations</div>
+                    <div class="recommendation-item">Establish a "creative laboratory" mechanism producing 4 core technology analysis videos weekly</div>
+                    <div class="recommendation-item">Implement intelligent content production system with AI-assisted personalization</div>
+                    <div class="recommendation-item">Develop cross-platform data sharing and attribution model</div>
+                    <div class="recommendation-item">Build a comprehensive UGC incentive system to generate authentic content at scale</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // 等待DOM加载完成
+    window.onload = function() {
+        console.log('页面完全加载完成，开始初始化图表...');
+        
+        // 初始化品牌表现图表
+        initBrandPerformanceChart();
+        
+        // 初始化市场份额图表
+        initMarketShareChart();
+        
+        // 初始化价格性能图表
+        initPricePerformanceChart();
+        
+        // 响应窗口大小变化
+        window.addEventListener('resize', function() {
+            // 重新调整所有图表大小
+            resizeAllCharts();
+        });
+    };
+
+    // 调整所有图表大小
+    function resizeAllCharts() {
+        const chartIds = [
+            'brand-performance-chart',
+            'market-share-chart',
+            'price-performance-chart'
+        ];
+        
+        chartIds.forEach(function(id) {
+            const chartDom = document.getElementById(id);
+            if (chartDom) {
+                const chart = echarts.getInstanceByDom(chartDom);
+                if (chart) {
+                    chart.resize();
+                    console.log(`调整图表大小: ${id}`);
+                }
+            }
+        });
+    }
+
+    // 初始化品牌表现图表
+    function initBrandPerformanceChart() {
+        const chartDom = document.getElementById('brand-performance-chart');
+        if (!chartDom) {
+            console.error('找不到品牌表现图表容器');
+            return;
+        }
+        
+        console.log('初始化品牌表现图表...');
+        const myChart = echarts.init(chartDom);
+        
+        const option = {
+            title: {
+                text: 'Tribit Performance Metrics (2022-2024)',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: ['Amazon Ranking', 'Annual Growth Rate (%)', 'Product Reviews (thousands)'],
+                bottom: 10
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['2022', '2023', '2024']
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: 'Ranking',
+                    min: 0,
+                    max: 20,
+                    inverse: true,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: 'Others',
+                    min: 0,
+                    max: 50,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: 'Amazon Ranking',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    data: [15, 12, 10],
+                    lineStyle: {
+                        width: 3,
+                        color: '#1a237e'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8
+                },
+                {
+                    name: 'Annual Growth Rate (%)',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [15, 17, 20],
+                    lineStyle: {
+                        width: 3,
+                        color: '#388e3c'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8
+                },
+                {
+                    name: 'Product Reviews (thousands)',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: [20, 26, 34],
+                    lineStyle: {
+                        width: 3,
+                        color: '#f9a825'
+                    },
+                    symbol: 'circle',
+                    symbolSize: 8
+                }
+            ]
+        };
+        
+        myChart.setOption(option);
+        console.log('品牌表现图表初始化完成');
+    }
+
+    // 初始化市场份额图表
+    function initMarketShareChart() {
+        const chartDom = document.getElementById('market-share-chart');
+        if (!chartDom) {
+            console.error('找不到市场份额图表容器');
+            return;
+        }
+        
+        console.log('初始化市场份额图表...');
+        const myChart = echarts.init(chartDom);
+        
+        const option = {
+            title: {
+                text: 'Amazon Audio Market Share',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c}% ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 10,
+                data: ['Soundcore', 'TOZO', 'JBL', 'Bose', 'Sony', 'Tribit', 'Others']
+            },
+            series: [
+                {
+                    name: 'Market Share',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '16',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: true
+                    },
+                    data: [
+                        {value: 15, name: 'Soundcore'},
+                        {value: 12, name: 'TOZO'},
+                        {value: 18, name: 'JBL'},
+                        {value: 10, name: 'Bose'},
+                        {value: 8, name: 'Sony'},
+                        {value: 8, name: 'Tribit', itemStyle: {color: '#1a237e'}},
+                        {value: 29, name: 'Others'}
+                    ]
+                }
+            ]
+        };
+        
+        myChart.setOption(option);
+        console.log('市场份额图表初始化完成');
+    }
+
+    // 初始化价格性能图表
+    function initPricePerformanceChart() {
+        const chartDom = document.getElementById('price-performance-chart');
+        if (!chartDom) {
+            console.error('找不到价格性能图表容器');
+            return;
+        }
+        
+        console.log('初始化价格性能图表...');
+        const myChart = echarts.init(chartDom);
+        
+        const option = {
+            title: {
+                text: 'Price vs. Performance Positioning',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    return params.data[3] + '<br/>Price: $' + params.data[0] + 
+                           '<br/>Performance Rating: ' + params.data[1] + 
+                           '<br/>Review Score: ' + params.data[2];
+                }
+            },
+            xAxis: {
+                type: 'value',
+                name: 'Price ($)',
+                min: 0,
+                max: 200
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Performance Rating',
+                min: 6,
+                max: 10
+            },
+            series: [
+                {
+                    type: 'scatter',
+                    symbolSize: function(data) {
+                        return data[2] * 5; // Size based on review score
+                    },
+                    data: [
+                        [49, 7.8, 4.6, 'Tribit XSound Go'],
+                        [30, 7.2, 4.5, 'TOZO T6'],
+                        [55, 8.0, 4.7, 'Soundcore Motion'],
+                        [69, 8.2, 4.6, 'Srhythm NC25'],
+                        [120, 8.7, 4.8, 'JBL Flip 6'],
+                        [179, 9.1, 4.7, 'Bose SoundLink'],
+                        [149, 8.9, 4.5, 'Sony LinkBuds'],
+                        [40, 7.5, 4.4, 'Average Competitor']
+                    ],
+                    itemStyle: {
+                        color: function(params) {
+                            // 为Tribit产品使用特殊颜色
+                            if(params.data[3].includes('Tribit')) {
+                                return '#1a237e';
+                            }
+                            // 其他品牌使用不同颜色
+                            const colors = ['#ff7043', '#29b6f6', '#66bb6a', '#ffa726', '#8d6e63', '#5c6bc0'];
+                            return colors[params.dataIndex % colors.length];
+                        }
+                    }
+                }
+            ]
+        };
+        
+        myChart.setOption(option);
+        console.log('价格性能图表初始化完成');
+    }
+    </script>

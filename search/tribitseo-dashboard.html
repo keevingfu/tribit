@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribit SEO 排名分析仪表板</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 自定义样式 -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            border-top-left-radius: 10px !important;
+            border-top-right-radius: 10px !important;
+            padding: 15px 20px;
+        }
+        .card-title {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #333;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1890ff;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .chart-container {
+            height: 300px;
+            width: 100%;
+        }
+        .table-responsive {
+            border-radius: 10px;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: none;
+            font-weight: 600;
+            color: #333;
+        }
+        .competition-high {
+            color: #f5222d;
+            font-weight: 600;
+        }
+        .competition-medium {
+            color: #faad14;
+            font-weight: 600;
+        }
+        .competition-low {
+            color: #52c41a;
+            font-weight: 600;
+        }
+        .competition-none {
+            color: #1890ff;
+            font-weight: 600;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #1890ff !important;
+        }
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .page-item.active .page-link {
+            background-color: #1890ff;
+            border-color: #1890ff;
+        }
+        .page-link {
+            color: #1890ff;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box .form-control {
+            padding-right: 40px;
+            border-radius: 20px;
+        }
+        .search-box .btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chart-line me-2"></i>Tribit SEO 排名分析仪表板
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i>首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-chart-bar me-1"></i>报告</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i>设置</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <div class="container py-4">
+        <!-- 概览统计 -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card bg-white">
+                    <div class="card-body">
+                        <div class="stat-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="stat-value" id="totalKeywords">892</div>
+                        <div class="stat-label">总关键词数量</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-white">
+                    <div class="card-body">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-value" id="top10Keywords">249</div>
+                        <div class="stat-label">前10名关键词数量</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-white">
+                    <div class="card-body">
+                        <div class="stat-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="stat-value" id="totalSearchVolume">1,138,450</div>
+                        <div class="stat-label">总搜索量</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card bg-white">
+                    <div class="card-body">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" id="totalTraffic">24,521</div>
+                        <div class="stat-label">总流量</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 排名分布和搜索量分布 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-pie me-2"></i>排名分布
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="rankDistributionChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-bar me-2"></i>搜索量分布
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="volumeDistributionChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流量贡献最大的关键词 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-star me-2"></i>流量贡献最大的关键词
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="topTrafficKeywordsChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关键词意图和产品系列SEO表现 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-bullseye me-2"></i>关键词意图分布
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="keywordIntentChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-box me-2"></i>产品系列SEO表现
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="productPerformanceChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SERP特性和排名变化分析 -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-list me-2"></i>SERP特性分布
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="serpFeaturesChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-exchange-alt me-2"></i>排名变化分析
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="rankChangesChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 竞争度分析 -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-fist-raised me-2"></i>竞争度分析
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="competitionAnalysisChart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 关键词表格 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">
+                            <i class="fas fa-table me-2"></i>关键词详情
+                        </h5>
+                        <div class="search-box">
+                            <input type="text" class="form-control" id="keywordSearch" placeholder="搜索关键词...">
+                            <button class="btn btn-primary" id="searchButton">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>关键词</th>
+                                        <th>排名</th>
+                                        <th>搜索量</th>
+                                        <th>流量</th>
+                                        <th>流量占比</th>
+                                        <th>CPC</th>
+                                        <th>竞争度</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="keywordsTableBody">
+                                    <!-- 表格内容将通过JavaScript动态生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav class="mt-3">
+                            <ul class="pagination justify-content-center" id="keywordsPagination">
+                                <!-- 分页控件将通过JavaScript动态生成 -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-white py-4 mt-5 border-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2025 Tribit SEO 排名分析仪表板</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">最后更新时间: 2025年4月21日</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <!-- 自定义脚本 -->
+    <script src="js/seo-dashboard.js"></script>
+    <script src="js/seo-dashboard-functions.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟数据
+            const mockData = {
+                "intent_distribution": [
+                    {"intent": "商业", "count": 325},
+                    {"intent": "信息", "count": 412},
+                    {"intent": "导航", "count": 98},
+                    {"intent": "交易", "count": 57}
+                ],
+                "product_performance": [
+                    {"series": "StormBox", "keyword_count": 45, "avg_position": 3.2, "total_traffic": 5240, "total_volume": 18500},
+                    {"series": "FlyBuds", "keyword_count": 38, "avg_position": 5.7, "total_traffic": 3180, "total_volume": 15200},
+                    {"series": "MaxSound", "keyword_count": 32, "avg_position": 8.3, "total_traffic": 1950, "total_volume": 12800},
+                    {"series": "XSound", "keyword_count": 29, "avg_position": 4.1, "total_traffic": 3850, "total_volume": 14300},
+                    {"series": "XFree", "keyword_count": 27, "avg_position": 2.5, "total_traffic": 7120, "total_volume": 22400}
+                ],
+                "serp_features": [
+                    {"feature": "精选摘要", "count": 78},
+                    {"feature": "人们也在问", "count": 124},
+                    {"feature": "相关搜索", "count": 215},
+                    {"feature": "购物结果", "count": 42},
+                    {"feature": "视频结果", "count": 67},
+                    {"feature": "图片轮播", "count": 35},
+                    {"feature": "本地结果", "count": 29}
+                ],
+                "rank_changes": [
+                    {"change": "排名上升", "keyword_count": 243},
+                    {"change": "排名下降", "keyword_count": 187},
+                    {"change": "排名不变", "keyword_count": 462}
+                ],
+                "competition_analysis": [
+                    {"level": "高竞争", "keyword_count": 105, "avg_cpc": 2.85},
+                    {"level": "中竞争", "keyword_count": 287, "avg_cpc": 1.42},
+                    {"level": "低竞争", "keyword_count": 412, "avg_cpc": 0.65},
+                    {"level": "无竞争", "keyword_count": 88, "avg_cpc": 0.12}
+                ],
+                "keywords_table": [
+                    {"keyword": "xfree", "position": 5, "search_volume": 301000, "traffic": 13244, "percentage": 54.01, "cpc": 1.25, "competition": 0.75},
+                    {"keyword": "tribit stormbox blast", "position": 1, "search_volume": 1900, "traffic": 1520, "percentage": 6.19, "cpc": 0.85, "competition": 0.45},
+                    {"keyword": "tribit", "position": 1, "search_volume": 1900, "traffic": 1520, "percentage": 6.19, "cpc": 1.15, "competition": 0.62},
+                    {"keyword": "tribit speaker", "position": 1, "search_volume": 1300, "traffic": 1040, "percentage": 4.24, "cpc": 0.95, "competition": 0.58},
+                    {"keyword": "tribit headphones", "position": 1, "search_volume": 1000, "traffic": 800, "percentage": 3.26, "cpc": 1.05, "competition": 0.65},
+                    {"keyword": "tribit stormbox", "position": 1, "search_volume": 1000, "traffic": 800, "percentage": 3.26, "cpc": 0.78, "competition": 0.42},
+                    {"keyword": "tribit stormbox micro 2", "position": 1, "search_volume": 880, "traffic": 704, "percentage": 2.87, "cpc": 0.65, "competition": 0.35},
+                    {"keyword": "tribit maxsound plus", "position": 1, "search_volume": 720, "traffic": 576, "percentage": 2.35, "cpc": 0.72, "competition": 0.38},
+                    {"keyword": "tribit stormbox micro", "position": 1, "search_volume": 590, "traffic": 472, "percentage": 1.92, "cpc": 0.68, "competition": 0.36},
+                    {"keyword": "tribit flybuds", "position": 1, "search_volume": 480, "traffic": 384, "percentage": 1.57, "cpc": 0.92, "competition": 0.48},
+                    {"keyword": "tribit bluetooth speaker", "position": 2, "search_volume": 390, "traffic": 273, "percentage": 1.11, "cpc": 0.88, "competition": 0.52},
+                    {"keyword": "tribit xsound", "position": 2, "search_volume": 320, "traffic": 224, "percentage": 0.91, "cpc": 0.75, "competition": 0.40},
+                    {"keyword": "tribit maxboom", "position": 2, "search_volume": 260, "traffic": 182, "percentage": 0.74, "cpc": 0.70, "competition": 0.38},
+                    {"keyword": "tribit earbuds", "position": 2, "search_volume": 210, "traffic": 147, "percentage": 0.60, "cpc": 0.95, "competition": 0.55},
+                    {"keyword": "tribit wireless earbuds", "position": 3, "search_volume": 170, "traffic": 102, "percentage": 0.42, "cpc": 1.02, "competition": 0.58},
+                    {"keyword": "tribit xboom", "position": 3, "search_volume": 140, "traffic": 84, "percentage": 0.34, "cpc": 0.68, "competition": 0.36},
+                    {"keyword": "tribit portable speaker", "position": 3, "search_volume": 110, "traffic": 66, "percentage": 0.27, "cpc": 0.82, "competition": 0.45},
+                    {"keyword": "tribit waterproof speaker", "position": 4, "search_volume": 90, "traffic": 45, "percentage": 0.18, "cpc": 0.85, "competition": 0.48},
+                    {"keyword": "tribit audio", "position": 4, "search_volume": 70, "traffic": 35, "percentage": 0.14, "cpc": 0.72, "competition": 0.40},
+                    {"keyword": "tribit review", "position": 5, "search_volume": 60, "traffic": 24, "percentage": 0.10, "cpc": 0.65, "competition": 0.35}
+                ]
+            };
+            
+            // 初始化仪表板
+            initDashboard({
+                overview: dashboardData.overview,
+                rank_distribution: dashboardData.rank_distribution,
+                volume_distribution: dashboardData.volume_distribution,
+                top_traffic_keywords: dashboardData.top_traffic_keywords,
+                intent_distribution: mockData.intent_distribution,
+                product_performance: mockData.product_performance,
+                serp_features: mockData.serp_features,
+                rank_changes: mockData.rank_changes,
+                competition_analysis: mockData.competition_analysis,
+                keywords_table: mockData.keywords_table
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+SearchSuggestions|2827
+RegionalSearchSuggestions|0
+tribit-en-us-suggestions-24-02-2025.csv|1078
+tribit-en-us-suggestions-24-02-2025 (1).csv|972
+tribit-en-us-suggestions-24-02-2025 (2).csv|689
+tribit-en-suggestions-24-02-2025.csv|88
+75340|362.2723125|123.02137247966
+tribit earbuds|24200|0.63|tribit-en-suggestions-24-02-2025.csv
+tribit headphones|16200|0.36|tribit-en-suggestions-24-02-2025.csv
+tribit quietplus 72|12100|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox blast|5800|1.04|tribit-en-suggestions-24-02-2025.csv
+tribit xsound go|3000|0.47|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox micro 2|2600|0.94|tribit-en-suggestions-24-02-2025.csv
+tribit|2400|0.43|tribit-en-suggestions-24-02-2025.csv
+tribit flybuds 3|2160|0.68|tribit-en-suggestions-24-02-2025.csv
+tribit speaker|1900|0.6|tribit-en-suggestions-24-02-2025.csv
+tribit xsound plus 2|840|0.5|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox 2|780|0.44|tribit-en-suggestions-24-02-2025.csv
+tribit bluetooth speaker|480|0.65|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox flow|420|0.55|tribit-en-suggestions-24-02-2025.csv
+tribit micro 2|420|0.46|tribit-en-suggestions-24-02-2025.csv
+tribit flybuds c1|330|0.37|tribit-en-suggestions-24-02-2025.csv
+how to connect tribit earbuds|250|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit xsound mega|180|0.83|tribit-en-suggestions-24-02-2025.csv
+tribit wireless earbuds|180|0.54|tribit-en-suggestions-24-02-2025.csv
+tribit vs jbl|160|0.4|tribit-en-suggestions-24-02-2025.csv
+tribit xsound|140|0.22|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox 2 review|120|0.71|tribit-en-suggestions-24-02-2025.csv
+tribit flybuds|110|0.69|tribit-en-suggestions-24-02-2025.csv
+tribit speaker review|100|0.74|tribit-en-suggestions-24-02-2025.csv
+tribit movebuds|60|0.98|tribit-en-suggestions-24-02-2025.csv
+tribit boombox|60|0.7|tribit-en-suggestions-24-02-2025.csv
+tribit mini|40|0.41|tribit-en-suggestions-24-02-2025.csv
+tribit max sound plus|30|0.34|tribit-en-suggestions-24-02-2025.csv
+tribit xsound go 16w|20|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit vs anker speaker|20|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit jbl|20|0.0|tribit-en-suggestions-24-02-2025.csv
+are tribit speakers good|62730|10.0|tribit-en-us-suggestions-24-02-2025.csv
+tribit vs jbl|62710|0.4|16.0|tribit-en-suggestions-24-02-2025.csv
+耳塞类产品|153|24640|1910.052
+耳机类产品|89|16200|1368.07555555556
+QuietPlus系列|92|12100|1792.05882352941
+Stormbox系列|361|9760|373.233916666667
+XSound系列|284|4180|120.138482142857
+其他产品|1248|3330|38.977337962963
+Flybuds系列|163|2600|117.518873239437
+音箱类产品|361|2530|85.4725742574257
+XFree系列|76|0|6621.11111111111
+Stormbox Blast|134|5820|702.647741935484
+Stormbox Micro|54|2600|368.533846153846
+Stormbox 2|23|900|144.882941176471
+Stormbox Flow|11|420|157.6375
+Stormbox其他|71|20|407.5
+Stormbox Pro|59|0|167.333333333333
+Stormbox Mini|9|0|95.7142857142857
+通用耳塞|153|24640|1910.052
+通用耳机|89|16200|1368.07555555556
+QuietPlus系列|92|12100|1792.05882352941
+Flybuds系列|163|2600|117.518873239437
+其他耳机产品|10|0|
+XFree系列|76|0|6621.11111111111
+其他功能|2087|67840
+音质|346|4210
+麦克风|97|3020
+连接/配对|162|270
+降噪|30|0
+防水|29|0
+重置|15|0
+充电/电池|60|0
+低音|1|0
+JBL|146|170|16.6272727272727
+Anker|17|20|13.3333333333333
+其他竞品|85|0|10.0
+Soundcore|23|0|20.0
+Sony|4|0|10.0
+Marshall|7|0|10.0
+Bose|8|0|16.6666666666667
+tribit vs jbl|40|0.4|tribit-en-suggestions-24-02-2025.csv
+tribit vs jbl|40|0.4|tribit-en-suggestions-24-02-2025.csv
+tribit vs jbl|40|0.4|tribit-en-suggestions-24-02-2025.csv
+tribit vs jbl|40|0.4|tribit-en-suggestions-24-02-2025.csv
+tribit vs anker speaker|10|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit vs anker speaker|10|0.0|tribit-en-suggestions-24-02-2025.csv
+tribit stormbox blast 2 vs jbl boombox 3|10|0.0|tribit-en-suggestions-24-02-2025.csv
+how to connect tribit earbuds|50|0.0|tribit-en-suggestions-24-02-2025.csv
+how to connect 2 tribit speakers|10|0.0|tribit-en-suggestions-24-02-2025.csv
+如何连接/配对|15|60
+如何重置|7|0
+如何充电|3|0
+哪里购买|2|0
+哪个更好|4|0
+其他问题|9|0
+其他why问题|1|0
+其他who问题|1|0
+其他where问题|4|0
+其他what问题|4|0
+其他how问题|8|0
+tribit-en-suggestions-24-02-2025.csv|en|87
+tribit-en-suggestions-24-02-2025.csv|Language|1
+tribit-en-us-suggestions-24-02-2025 (1).csv|en|971
+tribit-en-us-suggestions-24-02-2025 (1).csv|Language|1
+tribit-en-us-suggestions-24-02-2025 (2).csv|en|688
+tribit-en-us-suggestions-24-02-2025 (2).csv|Language|1
+tribit-en-us-suggestions-24-02-2025.csv|en|1077
+tribit-en-us-suggestions-24-02-2025.csv|Language|1
+en|sugg|88|75340
+en|us-s|2739|0
+Alphabeticals|809|43680|363.488669131238
+Related|1722|30140|467.015265151515
+Numbers|155|1350|381.308857142857
+Questions|58|60|15.4054054054054
+Prepositions|38|60|10.0
+Comparisons|41|50|13.4620689655172
+Modifier Type|4|0|
+e|39|12150
+q|35|12110
+h|42|8110
+s|48|6220
+x|46|1390
+f|45|1160
+g|32|1000
+b|45|540
+m|46|310
+p|42|230
+c|43|170
+w|41|90
+r|32|90
+v|32|50
+j|32|50
+a|39|10
+z|13|0
+y|6|0
+u|28|0
+t|29|0

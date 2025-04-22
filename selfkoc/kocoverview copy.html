@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribit 自营社媒矩阵号 Social Performance Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .dashboard-header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .dashboard-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 5px 0 0 0;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            font-weight: bold;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .chart-container {
+            height: 400px;
+            width: 100%;
+        }
+        .platform-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        .stats-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .stats-card.instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
+        }
+        .stats-card.tiktok {
+            background: linear-gradient(135deg, #010101, #69C9D0);
+        }
+        .stats-card.youtube {
+            background: linear-gradient(135deg, #FF0000, #282828);
+        }
+        .stats-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stats-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .nav-tabs {
+            border-bottom: none;
+            margin-bottom: 20px;
+        }
+        .nav-tabs .nav-link {
+            border: none;
+            color: #6c757d;
+            font-weight: 500;
+            padding: 10px 15px;
+        }
+        .nav-tabs .nav-link.active {
+            color: #343a40;
+            background-color: transparent;
+            border-bottom: 3px solid #343a40;
+        }
+        .table th {
+            font-weight: 600;
+            background-color: #f8f9fa;
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .platform-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .platform-badge.instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D);
+        }
+        .platform-badge.tiktok {
+            background: linear-gradient(135deg, #010101, #69C9D0);
+        }
+        .platform-badge.youtube {
+            background: linear-gradient(135deg, #FF0000, #282828);
+        }
+        .top-content-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .top-content-item:last-child {
+            border-bottom: none;
+        }
+        .content-url {
+            word-break: break-all;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        .content-metrics {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        .content-metrics span {
+            margin-right: 15px;
+        }
+        .content-metrics i {
+            margin-right: 5px;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="dashboard-title">Tribit 自营社媒矩阵号 Social Performance Dashboard</h1>
+                    <p class="dashboard-subtitle">数据更新时间: 2025年4月10日</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button id="refreshData" class="btn btn-outline-light btn-sm">刷新数据</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- 数据生成提示 -->
+    <div class="container mt-3" id="dataGenerationAlert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>注意！</strong> 如果没有看到数据，请在终端中运行以下命令生成数据：<br>
+            <code>cd /Users/cavin/Desktop/tribit/selfkoc && python3 generate_dashboard_data.py</code><br>
+            然后刷新此页面。
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="container">
+        <!-- 平台概览 -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="stats-card instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/600px-Instagram_icon.png" class="platform-icon" alt="Instagram">
+                    <span>Instagram</span>
+                    <div id="instagramStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card tiktok">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1200px-TikTok_logo.svg.png" class="platform-icon" alt="TikTok">
+                    <span>TikTok</span>
+                    <div id="tiktokStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card youtube">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png" class="platform-icon" alt="YouTube">
+                    <span>YouTube</span>
+                    <div id="youtubeStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 平台对比 -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>平台表现对比</span>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-outline-secondary active" data-metric="views">观看量</button>
+                    <button type="button" class="btn btn-outline-secondary" data-metric="likes">点赞数</button>
+                    <button type="button" class="btn btn-outline-secondary" data-metric="comments">评论数</button>
+                    <button type="button" class="btn btn-outline-secondary" data-metric="posts">内容数</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="platformComparisonChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <!-- 互动率对比 -->
+        <div class="card">
+            <div class="card-header">
+                <span>平台互动率对比</span>
+            </div>
+            <div class="card-body">
+                <div id="engagementRateChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <!-- 月度趋势 -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>月度表现趋势</span>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-outline-secondary active" data-platform="all">所有平台</button>
+                    <button type="button" class="btn btn-outline-secondary" data-platform="instagram">Instagram</button>
+                    <button type="button" class="btn btn-outline-secondary" data-platform="tiktok">TikTok</button>
+                    <button type="button" class="btn btn-outline-secondary" data-platform="youtube">YouTube</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="monthlyTrendChart" class="chart-container"></div>
+            </div>
+        </div>
+
+        <!-- 账号表现 -->
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs" id="accountTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="instagram-tab" data-bs-toggle="tab" data-bs-target="#instagram-accounts" type="button" role="tab">Instagram 账号</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tiktok-tab" data-bs-toggle="tab" data-bs-target="#tiktok-accounts" type="button" role="tab">TikTok 账号</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="youtube-tab" data-bs-toggle="tab" data-bs-target="#youtube-accounts" type="button" role="tab">YouTube 账号</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="accountTabsContent">
+                    <div class="tab-pane fade show active" id="instagram-accounts" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>账号</th>
+                                        <th>内容数</th>
+                                        <th>总观看量</th>
+                                        <th>平均观看量</th>
+                                        <th>总点赞数</th>
+                                        <th>平均点赞数</th>
+                                        <th>总评论数</th>
+                                        <th>平均评论数</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="instagramAccountsTable">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading">
+                                                <div class="loading-spinner"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tiktok-accounts" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>账号</th>
+                                        <th>内容数</th>
+                                        <th>总观看量</th>
+                                        <th>平均观看量</th>
+                                        <th>总点赞数</th>
+                                        <th>平均点赞数</th>
+                                        <th>总评论数</th>
+                                        <th>平均评论数</th>
+                                        <th>总分享数</th>
+                                        <th>平均分享数</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tiktokAccountsTable">
+                                    <tr>
+                                        <td colspan="10">
+                                            <div class="loading">
+                                                <div class="loading-spinner"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="youtube-accounts" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>账号</th>
+                                        <th>内容数</th>
+                                        <th>总观看量</th>
+                                        <th>平均观看量</th>
+                                        <th>总点赞数</th>
+                                        <th>平均点赞数</th>
+                                        <th>总评论数</th>
+                                        <th>平均评论数</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="youtubeAccountsTable">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="loading">
+                                                <div class="loading-spinner"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 爆款内容 -->
+        <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-tabs" id="contentTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="instagram-content-tab" data-bs-toggle="tab" data-bs-target="#instagram-content" type="button" role="tab">Instagram 爆款内容</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tiktok-content-tab" data-bs-toggle="tab" data-bs-target="#tiktok-content" type="button" role="tab">TikTok 爆款内容</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="youtube-content-tab" data-bs-toggle="tab" data-bs-target="#youtube-content" type="button" role="tab">YouTube 爆款内容</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="contentTabsContent">
+                    <div class="tab-pane fade show active" id="instagram-content" role="tabpanel">
+                        <div id="instagramTopContent">
+                            <div class="loading">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tiktok-content" role="tabpanel">
+                        <div id="tiktokTopContent">
+                            <div class="loading">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="youtube-content" role="tabpanel">
+                        <div id="youtubeTopContent">
+                            <div class="loading">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>© 2025 Tribit 自营社媒矩阵号 Social Performance Dashboard</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 自定义脚本 -->
+    <script src="dashboard.js"></script>
+</body>
+</html>

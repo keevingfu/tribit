@@ -1,0 +1,125 @@
+/* Tribit SEO 排名分析仪表板样式 */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    font-weight: 600;
+    background-color: #f1f8ff;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.display-4 {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+/* 排名状态颜色 */
+.rank-up {
+    color: #198754;
+}
+
+.rank-down {
+    color: #dc3545;
+}
+
+.rank-same {
+    color: #6c757d;
+}
+
+/* 竞争度颜色 */
+.competition-high {
+    color: #dc3545;
+}
+
+.competition-medium {
+    color: #fd7e14;
+}
+
+.competition-low {
+    color: #198754;
+}
+
+.competition-none {
+    color: #6c757d;
+}
+
+/* 表格样式 */
+.table {
+    font-size: 0.9rem;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f8ff;
+}
+
+/* 分页样式 */
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.pagination .page-link {
+    color: #0d6efd;
+}
+
+/* 搜索框样式 */
+#keywordSearch:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* 图表主题色 */
+.chart-primary {
+    color: #0d6efd;
+}
+
+.chart-secondary {
+    color: #6c757d;
+}
+
+.chart-success {
+    color: #198754;
+}
+
+.chart-danger {
+    color: #dc3545;
+}
+
+.chart-warning {
+    color: #ffc107;
+}
+
+.chart-info {
+    color: #0dcaf0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+}

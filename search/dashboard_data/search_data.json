@@ -1,0 +1,54 @@
+{
+  "top_search_terms": [],
+  "product_categories": [
+    {
+      "category": "Other",
+      "count": 3401,
+      "total_search_volume": 0,
+      "avg_search_volume": 0.0
+    }
+  ],
+  "competitor_analysis": {
+    "raw_comparisons": [],
+    "competitors": []
+  },
+  "keyword_modifiers": [
+    {
+      "type": "Unknown",
+      "count": 3401
+    }
+  ],
+  "product_model_analysis": [],
+  "key_questions": [],
+  "search_alphabet_distribution": [
+    {
+      "letter": "R",
+      "count": 2264
+    },
+    {
+      "letter": "A",
+      "count": 834
+    },
+    {
+      "letter": "N",
+      "count": 160
+    },
+    {
+      "letter": "Q",
+      "count": 58
+    },
+    {
+      "letter": "C",
+      "count": 43
+    },
+    {
+      "letter": "P",
+      "count": 38
+    },
+    {
+      "letter": "M",
+      "count": 4
+    }
+  ],
+  "regional_analysis": []
+}
